@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+git checkout alpha
+git checkout develop
+git checkout master -- cmds
+git reset cmds
+
+git branch -D alpha-x
+clear
+
+
+printf "\n\n===\nALPHA\n\n"
+git show alpha:A | cat
+
+printf "press enter"
+read
+
+printf "\n\n===\nDEVELOP\n\n"
+git show develop:A | cat
+
+printf "press enter"
+read
+
+printf "\n\n===\nDIFF DEVELOP..ALPHA\n\n"
+git diff develop..alpha | cat
+
+printf "\n\n\n"
+echo "Let's do magic"
+
+printf "press enter"
+read
+
+
+git checkout develop
+git checkout -b tmp
+git merge -s ours alpha -m "It's a kind of magic"
+git checkout alpha
+git checkout -b alpha-x
+git merge tmp
+git branch -D tmp
+
+clear
+
+printf "\n\n===\nORIGINAL ALPHA\n\n"
+git show alpha:A | cat
+
+printf "\n\n===\nDEVELOP\n\n"
+git show develop:A | cat
+
+printf "\n\n===\nALPHA-X\n\n"
+git show alpha-x:A | cat
+
+git clean -fxd
+git checkout masster
