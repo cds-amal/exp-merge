@@ -50,4 +50,4 @@ printf "\n\n===\nALPHA-X\n\n"
 git show alpha-x:A | cat
 
 git clean -fxd
-git checkout masster
+git checkout master
